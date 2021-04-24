@@ -10,7 +10,8 @@ function App(){
     return (
         <div>
             <Header />
-            {notes.map(note => <Note  key={note.key} title={note.title} content={note.content} /> )}
+            <CreateArea />
+            <Note  key={uuidv4()} title="Note title" content="Note Content" /> 
             <Footer />
         </div>
     );
