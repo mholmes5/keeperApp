@@ -20,7 +20,7 @@ function App() {
             <Header />
             <CreateArea onAdd={addNote} />
             {notes.map((noteItem) => {
-                return <Note key={uuidv4()} title={noteItem.title} content={noteItem.content} index={index} />  
+                return <Note key={uuidv4()} title={noteItem.title} content={noteItem.content} />  
             })}
             <Footer />
         </div>
