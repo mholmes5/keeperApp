@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
+import Zoom from "@material-ui/core/Zoom";
 
 function CreateArea(props) {
     const [note, setInputNote] = useState({
@@ -6,6 +9,7 @@ function CreateArea(props) {
         content: ""
     });
     
+    const [contentClicked, setContentClicked] = useState(false);
 
     function handleNoteChange(event) {
         const {name, value} = event.target;
@@ -24,23 +28,34 @@ function CreateArea(props) {
 
     }
 
+    function handleClick() {
+        setContentClicked(true);
+      }
+
     return (
         <div>
-            <form>
-                <input 
-                    name="title" 
-                    placeholder="Title" 
-                    value={note.title} 
-                    onChange={handleNoteChange} 
-                />
+            <form className="create-note">
+                {contentClicked && (
+                    <input
+                        name="title"
+                        onChange={handleNoteChange}
+                        value={note.title}
+                        placeholder="Title"
+                    />
+                )}
                 <textarea 
                     name="content"  
                     placeholder="Take a note..." 
-                    rows="3" 
+                    rows={contentClicked ? 3 : 1}
                     value={note.content} 
-                    onChange={handleNoteChange} 
+                    onChange={handleNoteChange}
+                    onClick={handleClick}
                 />
-                <button onClick={submitNote}>Add</button>
+                <Zoom in={contentClicked}>
+                    <Fab onClick={submitNote}>
+                        <AddIcon />
+                    </Fab>
+                </Zoom>
             </form>
         </div>
     );
